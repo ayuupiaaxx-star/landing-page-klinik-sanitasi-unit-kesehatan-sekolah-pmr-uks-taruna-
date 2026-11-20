@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik Sanitasi & UKS Taruna | Sekolah Sehat & Tangguh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef8ff',
+                            100: '#d9f0ff',
+                            500: '#0077b6',
+                            600: '#005f93',
+                            700: '#004870',
+                            800: '#033b5c',
+                        },
+                        accent: {
+                            500: '#e63946',
+                            600: '#d90429',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- TOP BAR / EMERGENCY HEADER -->
+    <header class="bg-brand-800 text-white text-xs sm:text-sm py-2 px-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-hospital text-accent-500"></i> UKS & Klinik Sanitasi Taruna</span>
+                <span class="hidden md:inline text-brand-100">|</span>
+                <span class="hidden md:flex items-center gap-1.5"><i class="fa-solid fa-phone text-emerald-400"></i> Piket IGD Sekolah: (0356) 881234</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="#survei" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1 rounded-full text-xs font-semibold transition flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-clipboard-list"></i> Isi Survei
+                </a>
+                <a href="#form-periksa" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold transition flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-stethoscope"></i> Daftar Periksa
+                </a>
+                <button onclick="openSosModal()" class="bg-accent-600 hover:bg-accent-500 text-white px-3 py-1 rounded-full text-xs font-bold transition flex items-center gap-1 animate-pulse shadow">
+                    <i class="fa-solid fa-triangle-exclamation"></i> SOS DARURAT
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white shadow-sm sticky top-[41px] sm:top-[45px] z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white text-xl font-bold shadow-md">
+                    <i class="fa-solid fa-kit-medical"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold text-brand-800 tracking-tight block leading-tight">UKS & KLINIK SANITASI</span>
+                    <span class="text-xs font-medium text-slate-500">PMR WIRA / MADYA TARUNA</span>
+                </div>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                <a href="#beranda" class="hover:text-brand-600 transition">Beranda</a>
+                <a href="#edukasi" class="hover:text-brand-600 transition">Edukasi Banner</a>
+                <a href="#p3k" class="hover:text-brand-600 transition">Panduan P3K</a>
+                <a href="#inventaris" class="hover:text-brand-600 transition">Stok & Piket</a>
+                <a href="#survei" class="hover:text-brand-600 transition">Survei Sekolah</a>
+                <a href="#video" class="hover:text-brand-600 transition">Video PHBS</a>
+                <a href="#form-periksa" class="hover:text-brand-600 transition">Antrean Periksa</a>
+                <a href="#peta" class="hover:text-brand-600 transition">Rujukan Faskes</a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-700 focus:outline-none text-xl p-2">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Beranda</a>
+            <a href="#edukasi" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Edukasi Banner</a>
+            <a href="#p3k" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Panduan P3K</a>
+            <a href="#inventaris" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Stok & Piket</a>
+            <a href="#survei" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Survei Sekolah</a>
+            <a href="#video" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Video PHBS</a>
+            <a href="#form-periksa" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Antrean Periksa</a>
+            <a href="#peta" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-brand-600">Rujukan Faskes</a>
+        </div>
+    </nav>
+
+    <!-- HERO / BANNER EDUKASI KESEHATAN (CAROUSEL) -->
+    <section id="beranda" class="pt-6 pb-12 bg-gradient-to-b from-brand-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="bg-brand-100 text-brand-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Portal Resmi Kesehatan Sekolah</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-2">Sehat, Bersih, & Siap Tanggap Bersama PMR/UKS Taruna</h1>
+                <p class="text-slate-600 text-sm sm:text-base">Pusat pelayanan kesehatan pertama di lingkungan sekolah, informasi sanitasi lingkungan, serta panduan pertolongan darurat kapan pun Anda butuhkan.</p>
+            </div>
+
+            <!-- Banner Carousel Container -->
+            <div class="relative bg-brand-800 rounded-2xl overflow-hidden shadow-xl text-white min-h-[360px] flex items-center">
+                <!-- Slide 1 -->
+                <div class="banner-slide absolute inset-0 transition-opacity duration-700 opacity-100 p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-r from-brand-800 via-brand-700 to-transparent">
+                    <div class="max-w-xl">
+                        <span class="bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded">Kampanye #1</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-3">Gerakan Cuci Tangan Pakai Sabun (CTPS)</h2>
+                        <p class="text-brand-100 text-sm sm:text-base mb-6">Cegah penyebaran kuman dan penyakit menular dengan membiasakan cuci tangan 6 langkah sebelum makan dan setelah beraktivitas.</p>
+                        <a href="#video" class="inline-flex items-center gap-2 bg-white text-brand-800 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-50 transition shadow">
+                            <i class="fa-solid fa-play"></i> Tonton Panduan Video
+                        </a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="banner-slide absolute inset-0 transition-opacity duration-700 opacity-0 p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-r from-indigo-900 via-indigo-800 to-transparent">
+                    <div class="max-w-xl">
+                        <span class="bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded">Kampanye #2</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-3">Waspada DBD: Terapkan 3M Plus!</h2>
+                        <p class="text-indigo-100 text-sm sm:text-base mb-6">Menguras penampungan air, menutup rapat, dan mendaur ulang barang bekas. Lindungi kelas dan sanitasi sekolah dari sarang nyamuk.</p>
+                        <a href="#p3k" class="inline-flex items-center gap-2 bg-white text-indigo-900 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-100 transition shadow">
+                            <i class="fa-solid fa-shield-halved"></i> Lihat Info P3K
+                        </a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="banner-slide absolute inset-0 transition-opacity duration-700 opacity-0 p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-r from-teal-900 via-teal-800 to-transparent">
+                    <div class="max-w-xl">
+                        <span class="bg-sky-500 text-white text-xs font-bold px-2.5 py-1 rounded">Kampanye #3</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-3">Kantin Sehat & Gizi Seimbang</h2>
+                        <p class="text-teal-100 text-sm sm:text-base mb-6">Pilih jajanan sehat tanpa pemanis buatan dan pengawet berbahaya. Jaga kebugaran tubuh untuk konsentrasi belajar maksimal.</p>
+                        <a href="#inventaris" class="inline-flex items-center gap-2 bg-white text-teal-900 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-100 transition shadow">
+                            <i class="fa-solid fa-pills"></i> Cek Stok Obat & Piket
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center transition z-10">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center transition z-10">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- KARTU INFORMASI PERTOLONGAN PERTAMA (P3K) -->
+    <section id="p3k" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Panduan Cepat Tanggap</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Kartu Informasi Pertolongan Pertama</h2>
+                <p class="text-slate-600 text-sm mt-1">Klik pada salah satu kartu kondisi darurat di bawah untuk melihat instruksi langkah demi langkah penanganan di UKS.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div onclick="openP3kModal('Pingsan / Sinkop', ['Baringkan pasien di tempat datar dengan posisi kaki lebih tinggi sedikit.', 'Longgarkan dasi, kerah baju, atau sabuk agar sirkulasi udara lancar.', 'Jauhkan dari kerumunan orang agar pasien mendapat oksigen cukup.', 'Beri aroma minyak angin atau wewangian di bawah hidung perlahan.', 'Bawa ke ruang UKS jika belum sadar setelah 5 menit.'], 'Jangan langsung menuang air minum ke mulut saat pasien belum sepenuhnya sadar.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Pingsan / Lemas</h3>
+                    <p class="text-slate-600 text-xs mb-4">Penanganan awal saat siswa mendadak pingsan di upacara atau kelas.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+
+                <!-- Card 2 -->
+                <div onclick="openP3kModal('Luka Gores & Pendarahan Ringan', ['Cuci tangan petugas PMR menggunakan sabun dan air mengalir.', 'Bersihkan area sekitar luka dengan cairan antiseptik atau NaCl.', 'Tekan perlahan luka dengan kasa steril sampai pendarahan berhenti.', 'Oleskan salep antiseptik tipis dan tutup dengan plester/kasa.', 'Catat di buku saku UKS.'], 'Jangan meniup luka terbuka karena dapat menyebarkan bakteri dari mulut.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bandage"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Luka Gores & Berdarah</h3>
+                    <p class="text-slate-600 text-xs mb-4">Prosedur steril penanganan luka akibat terjatuh atau gesekan.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+
+                <!-- Card 3 -->
+                <div onclick="openP3kModal('Mimisan (Epistaksis)', ['Dudukkan korban dengan posisi kepala sedikit condong ke depan (jangan menengadah).', 'Jepit bagian lunak hidung (cuping hidung) selama 10 menit.', 'Instruksikan korban bernapas melalui mulut.', 'Kompres pangkal hidung dengan es batu yang dibalut kain.', 'Rujuk ke faskes jika mimisan tidak berhenti lebih dari 20 menit.'], 'Jangan menyumpal lubang hidung dengan kapas keras yang dapat merusak mukosa.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-face-grimace"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Mimisan (Hidung Berdarah)</h3>
+                    <p class="text-slate-600 text-xs mb-4">Langkah tepat mengatasi pecahnya pembuluh darah kapiler di hidung.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+
+                <!-- Card 4 -->
+                <div onclick="openP3kModal('Sesak Napas / Asma', ['Bawa korban ke ruangan yang sejuk dengan ventilasi udara terbuka.', 'Bantu korban duduk tegak dan longgarkan pakaian di dada.', 'Bantu gunakan inhaler pribadi jika korban membawa obat asma.', 'Tenangkan korban agar tidak panik dan atur pernapasan lambat.', 'Segera hubungi tim medis jika serangan tidak mereda.'], 'Hindari mengerumuni pasien sesak napas karena mengurangi pasokan oksigen.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-lungs"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Sesak Napas & Asma</h3>
+                    <p class="text-slate-600 text-xs mb-4">Pertolongan cepat saat siswa mengalami gangguan saluran pernapasan.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+
+                <!-- Card 5 -->
+                <div onclick="openP3kModal('Cedera Olahraga & Keseleo', ['Terapkan metode R.I.C.E (Rest, Ice, Compression, Elevation).', 'Istirahatkan bagian tubuh yang cedera dari aktivitas fisik.', 'Kompres dingin area bengkak menggunakan es selama 15-20 menit.', 'Balut elastis dengan lembut untuk mengurangi pembengkakan.', 'Posisikan bagian cedera lebih tinggi dari jantung.'], 'Jangan mengurut atau memijat bagian otot yang baru mengalami keseleo/robek.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-person-running"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Keseleo & Kram Otot</h3>
+                    <p class="text-slate-600 text-xs mb-4">Penanganan cedera saat jam olahraga atau kegiatan ekstrakurikuler.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+
+                <!-- Card 6 -->
+                <div onclick="openP3kModal('Demam & Masuk Angin', ['Ukur suhu tubuh siswa menggunakan termometer digital UKS.', 'Anjurkan siswa beristirahat di tempat tidur UKS dan minum air hangat.', 'Beri kompres air biasa di dahi atau lipatan ketiak.', 'Berikan obat penurun panas (Paracetamol) sesuai dosis UKS jika diperlukan.', 'Hubungi orang tua jika suhu tubuh di atas 38.5°C.'], 'Jangan gunakan air es atau alkohol untuk mengompres anak demam.')" class="bg-slate-50 border border-slate-200 hover:border-brand-500 rounded-2xl p-6 cursor-pointer transition hover:shadow-lg group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-temperature-high"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Demam & Masuk Angin</h3>
+                    <p class="text-slate-600 text-xs mb-4">Prosedur pemeriksaan suhu tubuh dan pertolongan awal masuk angin.</p>
+                    <span class="text-brand-600 font-semibold text-xs flex items-center gap-1">Lihat Panduan <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABEL DATA INVENTARISASI OBAT & PIKET JAGA HARIAN -->
+    <section id="inventaris" class="py-12 bg-slate-100 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Transparansi UKS</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Inventaris Obat & Jadwal Piket Jaga</h2>
+                <p class="text-slate-600 text-sm mt-1">Pantau ketersediaan stok obat harian di lemari P3K serta nama petugas PMR yang bertugas piket hari ini.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex justify-center mb-6">
+                <div class="bg-white p-1 rounded-xl shadow-sm border border-slate-200 inline-flex">
+                    <button onclick="switchTab('obat')" id="tab-obat-btn" class="px-5 py-2 rounded-lg text-sm font-bold bg-brand-700 text-white transition shadow-sm">
+                        <i class="fa-solid fa-pills mr-1.5"></i> Inventaris Obat & Alkes
+                    </button>
+                    <button onclick="switchTab('piket')" id="tab-piket-btn" class="px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-brand-700 transition">
+                        <i class="fa-solid fa-calendar-days mr-1.5"></i> Jadwal Piket PMR
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Tab 1: Inventaris Obat -->
+            <div id="content-obat" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                    <div class="w-full sm:w-72">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                <i class="fa-solid fa-search"></i>
+                            </span>
+                            <input type="text" id="search-obat" onkeyup="filterObat()" placeholder="Cari nama obat atau alkes..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                        <select id="filter-kategori" onchange="filterObat()" class="border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                            <option value="">Semua Kategori</option>
+                            <option value="Tablet">Tablet / Kapsul</option>
+                            <option value="Cair">Cairan / Antiseptik</option>
+                            <option value="Alat">Alat Kesehatan</option>
+                        </select>
+                        <button onclick="openRestockModal()" class="bg-brand-700 hover:bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-plus"></i> Ajukan Restock
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="table-obat">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase font-bold tracking-wider">
+                                <th class="py-3 px-4">Nama Obat / Alkes</th>
+                                <th class="py-3 px-4">Kategori</th>
+                                <th class="py-3 px-4">Stok Tersedia</th>
+                                <th class="py-3 px-4">Satuan</th>
+                                <th class="py-3 px-4">Status</th>
+                                <th class="py-3 px-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm text-slate-700">
+                            <tr class="hover:bg-slate-50 transition" data-category="Tablet">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Paracetamol 500mg</td>
+                                <td class="py-3.5 px-4"><span class="bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded text-xs font-medium">Tablet</span></td>
+                                <td class="py-3.5 px-4 font-bold">145</td>
+                                <td class="py-3.5 px-4 text-slate-500">Tablet / Strip</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">Aman</span></td>
+                                <td class="py-3.5 px-4 text-center">
+                                    <button onclick="alert('Permintaan restock Paracetamol diajukan.')" class="text-brand-600 hover:text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition">Restock</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition" data-category="Tablet">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Antasida Doen (Lambung)</td>
+                                <td class="py-3.5 px-4"><span class="bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded text-xs font-medium">Tablet</span></td>
+                                <td class="py-3.5 px-4 font-bold">60</td>
+                                <td class="py-3.5 px-4 text-slate-500">Tablet / Strip</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">Aman</span></td>
+                                <td class="py-3.5 px-4 text-center">
+                                    <button onclick="alert('Permintaan restock Antasida diajukan.')" class="text-brand-600 hover:text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition">Restock</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition" data-category="Cair">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Betadine / Povidone Iodine</td>
+                                <td class="py-3.5 px-4"><span class="bg-amber-50 text-amber-700 px-2.5 py-0.5 rounded text-xs font-medium">Cair</span></td>
+                                <td class="py-3.5 px-4 font-bold text-amber-600">8</td>
+                                <td class="py-3.5 px-4 text-slate-500">Botol 30ml</td>
+                                <td class="py-3.5 px-4"><span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-semibold">Menipis</span></td>
+                                <td class="py-3.5 px-4 text-center">
+                                    <button onclick="alert('Permintaan restock Betadine diajukan.')" class="text-brand-600 hover:text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition">Restock</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition" data-category="Alat">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Kasa Steril & Perban</td>
+                                <td class="py-3.5 px-4"><span class="bg-purple-50 text-purple-700 px-2.5 py-0.5 rounded text-xs font-medium">Alat</span></td>
+                                <td class="py-3.5 px-4 font-bold">35</td>
+                                <td class="py-3.5 px-4 text-slate-500">Pack</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">Aman</span></td>
+                                <td class="py-3.5 px-4 text-center">
+                                    <button onclick="alert('Permintaan restock Kasa Steril diajukan.')" class="text-brand-600 hover:text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition">Restock</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition" data-category="Alat">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Termometer Digital</td>
+                                <td class="py-3.5 px-4"><span class="bg-purple-50 text-purple-700 px-2.5 py-0.5 rounded text-xs font-medium">Alat</span></td>
+                                <td class="py-3.5 px-4 font-bold text-red-600">2</td>
+                                <td class="py-3.5 px-4 text-slate-500">Unit</td>
+                                <td class="py-3.5 px-4"><span class="bg-red-100 text-red-800 text-xs px-2.5 py-1 rounded-full font-semibold">Kritis</span></td>
+                                <td class="py-3.5 px-4 text-center">
+                                    <button onclick="alert('Permintaan restock Termometer diajukan.')" class="text-brand-600 hover:text-brand-800 text-xs font-semibold bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition">Restock</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content Tab 2: Jadwal Piket PMR -->
+            <div id="content-piket" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Jadwal Petugas Piket UKS & PMR Taruna</h3>
+                        <p class="text-xs text-slate-500">Petugas wajib hadir 15 menit sebelum bel jam pertama dan siaga saat jam istirahat.</p>
+                    </div>
+                    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-circle text-[8px] animate-pulse text-emerald-500"></i> Hari Ini: <span id="current-day-label">Jumat</span>
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <!-- Senin -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div class="font-bold text-slate-900 text-sm mb-2 pb-2 border-b border-slate-200 flex justify-between items-center">
+                            <span>Senin</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Kelompok 1</span>
+                        </div>
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Ahmad Zaki (XI IPA 1)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Siti Rahma (XI IPS 2)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Dimas Anggara (X-2)</li>
+                        </ul>
+                    </div>
+                    <!-- Selasa -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div class="font-bold text-slate-900 text-sm mb-2 pb-2 border-b border-slate-200 flex justify-between items-center">
+                            <span>Selasa</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Kelompok 2</span>
+                        </div>
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Bunga Lestari (XI IPA 2)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Rizky Pratama (XI IPS 1)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Anisa Fitri (X-1)</li>
+                        </ul>
+                    </div>
+                    <!-- Rabu -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div class="font-bold text-slate-900 text-sm mb-2 pb-2 border-b border-slate-200 flex justify-between items-center">
+                            <span>Rabu</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Kelompok 3</span>
+                        </div>
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Kevin Sanjaya (XI IPA 3)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Dewi Sartika (XI IPS 3)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Fajar Alfian (X-3)</li>
+                        </ul>
+                    </div>
+                    <!-- Kamis -->
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div class="font-bold text-slate-900 text-sm mb-2 pb-2 border-b border-slate-200 flex justify-between items-center">
+                            <span>Kamis</span>
+                            <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Kelompok 4</span>
+                        </div>
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Nadia Aulia (XI IPA 1)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Bayu Saputra (XI IPS 2)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Salma Hayati (X-2)</li>
+                        </ul>
+                    </div>
+                    <!-- Jumat (Highlighted as Today) -->
+                    <div class="border-2 border-brand-500 rounded-xl p-4 bg-brand-50/50 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-brand-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl">PIKET HARI INI</div>
+                        <div class="font-bold text-brand-900 text-sm mb-2 pb-2 border-b border-brand-200 flex justify-between items-center">
+                            <span>Jumat</span>
+                            <span class="text-[10px] bg-brand-200 text-brand-800 px-2 py-0.5 rounded font-semibold">Kelompok 5</span>
+                        </div>
+                        <ul class="space-y-1.5 text-xs text-slate-700">
+                            <li class="flex items-center gap-1.5 font-semibold"><i class="fa-solid fa-user-check text-brand-600 text-[10px]"></i> Carlo (Ketua PMR)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Rian Mahendra (XI IPA 2)</li>
+                            <li class="flex items-center gap-1.5"><i class="fa-solid fa-user text-brand-600 text-[10px]"></i> Tasya Kamila (X-1)</li>
+                        </ul>
+                        <div class="mt-3 pt-2 border-t border-brand-200 flex justify-center">
+                            <button onclick="alert('Panggilan darurat dikirim ke petugas piket Jumat!')" class="w-full bg-brand-700 hover:bg-brand-600 text-white py-1 rounded text-[11px] font-bold transition shadow-sm">
+                                <i class="fa-solid fa-bell mr-1"></i> Panggil Piket Hari Ini
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KARTU SURVEI KESEHATAN & SANITASI SEKOLAH -->
+    <section id="survei" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Partisipasi Warga Sekolah</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Kartu Survei Kesehatan & Sanitasi Sekolah</h2>
+                <p class="text-slate-600 text-sm mt-1">Bantu kami memantau kesehatan harian dan kebersihan lingkungan sekolah dengan mengisi survei singkat di bawah ini.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Survei Card 1: Skrining Harian -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Skrining Kesehatan Harian</h3>
+                        <p class="text-slate-600 text-xs mb-4">Bagaimana kondisi kesehatan fisik Anda saat hadir di sekolah hari ini?</p>
+                        
+                        <div class="space-y-2 mb-6">
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="skrining" class="text-brand-600 focus:ring-brand-500" checked> Badan Sehat & Bugar
+                            </label>
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="skrining" class="text-brand-600 focus:ring-brand-500"> Sedikit Pusing / Pilek Ringan
+                            </label>
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="skrining" class="text-brand-600 focus:ring-brand-500"> Demam / Butuh Periksa ke UKS
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="submitSurvey('Skrining Harian')" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-semibold py-2 rounded-xl text-xs transition shadow-sm">
+                        Kirim Skrining
+                    </button>
+                </div>
+
+                <!-- Survei Card 2: Penilaian Sanitasi Lingkungan -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Penilaian Sanitasi Kelas</h3>
+                        <p class="text-slate-600 text-xs mb-4">Beri penilaian kebersihan toilet, tempat sampah, dan ruang kelas Anda.</p>
+                        
+                        <div class="mb-4">
+                            <label class="block text-xs font-medium text-slate-700 mb-1">Rating Kebersihan:</label>
+                            <div class="flex gap-2 text-amber-400 text-lg cursor-pointer">
+                                <i class="fa-solid fa-star hover:scale-125 transition"></i>
+                                <i class="fa-solid fa-star hover:scale-125 transition"></i>
+                                <i class="fa-solid fa-star hover:scale-125 transition"></i>
+                                <i class="fa-solid fa-star hover:scale-125 transition"></i>
+                                <i class="fa-regular fa-star hover:scale-125 transition"></i>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="Catatan (cth: Air toilet kurang lancar)" class="w-full text-xs border border-slate-300 rounded-xl px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <button onclick="submitSurvey('Sanitasi Kelas')" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-semibold py-2 rounded-xl text-xs transition shadow-sm">
+                        Kirim Penilaian
+                    </button>
+                </div>
+
+                <!-- Survei Card 3: Kepuasan Layanan UKS -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Survei Kepuasan Layanan UKS</h3>
+                        <p class="text-slate-600 text-xs mb-4">Bagaimana tingkat kepuasan Anda terhadap kecepatan & keramahan petugas PMR?</p>
+                        
+                        <div class="space-y-2 mb-6">
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="kepuasan" class="text-purple-600 focus:ring-purple-500" checked> Sangat Memuaskan & Tanggap
+                            </label>
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="kepuasan" class="text-purple-600 focus:ring-purple-500"> Cukup Baik
+                            </label>
+                            <label class="flex items-center gap-2 text-xs font-medium text-slate-700 cursor-pointer">
+                                <input type="radio" name="kepuasan" class="text-purple-600 focus:ring-purple-500"> Perlu Peningkatan Fasilitas
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="submitSurvey('Kepuasan UKS')" class="w-full bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 rounded-xl text-xs transition shadow-sm">
+                        Kirim Umpan Balik
+                    </button>
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <p class="text-xs text-slate-500"><i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Total partisipasi warga sekolah minggu ini: <strong>482 Responden</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO EDUKASI HIDUP BERSIH (PHBS) -->
+    <section id="video" class="py-12 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest bg-emerald-950 px-3 py-1 rounded-full border border-emerald-800">Media Interaktif</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Video Edukasi Hidup Bersih & Sehat (PHBS)</h2>
+                <p class="text-slate-400 text-sm mt-1">Tonton modul video resmi kesehatan sekolah bersama Carlo untuk memahami langkah pencegahan penyakit sejak dini.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <!-- Video Player Column -->
+                <div class="lg:col-span-2 bg-black rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+                    <div class="relative aspect-video bg-slate-950 flex items-center justify-center">
+                        <!-- HTML5 Video Element with Local File vidio_hidupbersih.mp4 -->
+                        <video id="phbs-video" class="w-full h-full object-contain" controls preload="metadata" onended="onVideoEnded()">
+                            <source src="vidio_hidupbersih.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung pemutar video HTML5.
+                        </video>
+                    </div>
+                    <div class="p-6 bg-slate-900 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-semibold">Durasi 02:48</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Modul 1: Menjaga Kebersihan Diri Bersama Carlo</h3>
+                            <p class="text-slate-400 text-xs mt-0.5">Panduan harian mencuci tangan, mandi, dan menjaga kebugaran di lingkungan sekolah.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="playLocalVideo()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow">
+                                <i class="fa-solid fa-play"></i> Putar Video
+                            </button>
+                            <button onclick="markVideoCompleted()" id="btn-selesai-video" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-slate-700">
+                                <i class="fa-solid fa-check"></i> Tandai Selesai
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Chapters & Material List -->
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-emerald-400"></i> Poin Materi & Bab Waktu
+                    </h3>
+                    
+                    <div class="space-y-3 text-sm">
+                        <button onclick="seekVideo(0)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 transition border border-slate-700/50 flex justify-between items-center group">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 block">00:00 - Bab 1</span>
+                                <span class="text-slate-200 font-medium text-xs">Pentingnya Cuci Tangan Pakai Sabun</span>
+                            </div>
+                            <i class="fa-solid fa-circle-play text-slate-500 group-hover:text-emerald-400 transition"></i>
+                        </button>
+
+                        <button onclick="seekVideo(52)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 transition border border-slate-700/50 flex justify-between items-center group">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 block">00:52 - Bab 2</span>
+                                <span class="text-slate-200 font-medium text-xs">Mandi Teratur Pagi & Sore Hari</span>
+                            </div>
+                            <i class="fa-solid fa-circle-play text-slate-500 group-hover:text-emerald-400 transition"></i>
+                        </button>
+
+                        <button onclick="seekVideo(98)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 transition border border-slate-700/50 flex justify-between items-center group">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 block">01:38 - Bab 3</span>
+                                <span class="text-slate-200 font-medium text-xs">Merawat Handuk & Kebersihan Kuku</span>
+                            </div>
+                            <i class="fa-solid fa-circle-play text-slate-500 group-hover:text-emerald-400 transition"></i>
+                        </button>
+
+                        <button onclick="seekVideo(129)" class="w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 transition border border-slate-700/50 flex justify-between items-center group">
+                            <div>
+                                <span class="text-xs font-semibold text-emerald-400 block">02:09 - Bab 4</span>
+                                <span class="text-slate-200 font-medium text-xs">Sikat Gigi & Istirahat Cukup</span>
+                            </div>
+                            <i class="fa-solid fa-circle-play text-slate-500 group-hover:text-emerald-400 transition"></i>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-700 text-center">
+                        <span id="video-status-text" class="text-xs text-slate-400"><i class="fa-solid fa-circle-info mr-1 text-emerald-400"></i> Status: Belum ditonton selesai</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM PERMINTAAN PERIKSA KESEHATAN (ANTREAN DIGITAL) -->
+    <section id="form-periksa" class="py-12 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Form Box -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Layanan Cepat</span>
+                    <h2 class="text-2xl font-extrabold text-slate-900 mt-2 mb-1">Form Permintaan Periksa UKS</h2>
+                    <p class="text-slate-600 text-xs mb-6">Isi data di bawah jika Anda memerlukan pemeriksaan kesehatan, obat ringan, atau izin istirahat di ruang UKS.</p>
+
+                    <form id="uk-form" onsubmit="handleFormSubmit(event)" class="space-y-4 text-sm">
+                        <div>
+                            <label class="block font-semibold text-slate-700 text-xs mb-1">Nama Lengkap Siswa</label>
+                            <input type="text" id="form-nama" required placeholder="Cth: Budi Santoso" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold text-slate-700 text-xs mb-1">Kelas / Jurusan</label>
+                                <input type="text" id="form-kelas" required placeholder="Cth: XI IPA 1" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 text-xs mb-1">Keluhan Utama</label>
+                                <select id="form-keluhan" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                                    <option value="Pusing / Demam">Pusing / Demam</option>
+                                    <option value="Sakit Perut / Lambung">Sakit Perut / Lambung</option>
+                                    <option value="Luka / Jatuh Olahraga">Luka / Jatuh Olahraga</option>
+                                    <option value="Sesak Napas / Asma">Sesak Napas / Asma</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 text-xs mb-1">Keterangan Tambahan / Gejala</label>
+                            <textarea id="form-catatan" rows="2" placeholder="Cth: Sudah pusing sejak jam pelajaran pertama..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"></textarea>
+                        </div>
+                        <div class="flex gap-3">
+                            <button type="submit" class="flex-1 bg-brand-700 hover:bg-brand-600 text-white font-bold py-3 rounded-xl transition shadow-sm text-sm">
+                                <i class="fa-solid fa-ticket mr-1.5"></i> Ambil Nomor Antrean
+                            </button>
+                            <button type="reset" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-4 py-3 rounded-xl transition text-sm">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Live Queue Ticket Display -->
+                <div class="bg-gradient-to-br from-brand-800 to-brand-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl flex flex-col justify-between min-h-[420px]">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="bg-white/10 text-white text-xs px-3 py-1 rounded-full font-semibold">Antrean Digital UKS</span>
+                            <span id="queue-time" class="text-xs text-brand-100">Jumat, 20 Nov 2026</span>
+                        </div>
+                        <div class="text-center py-6">
+                            <span class="text-brand-200 text-xs block uppercase tracking-widest mb-1">Nomor Antrean Anda</span>
+                            <h3 id="queue-number" class="text-6xl font-black text-white tracking-wider my-2">UKS-04</h3>
+                            <p id="queue-name" class="text-sm font-medium text-brand-100">Belum ada tiket diambil</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10 space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-brand-200">Status Pemeriksaan:</span>
+                            <span id="queue-status" class="font-bold text-emerald-300">Menunggu Panggilan</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-brand-200">Petugas Jaga:</span>
+                            <span class="font-bold">Carlo & Tim Piket</span>
+                        </div>
+                        <div class="pt-2 border-t border-white/10 flex justify-between items-center">
+                            <span class="text-[11px] text-brand-200">Tunjukkan nomor ini ke petugas PMR.</span>
+                            <button onclick="copyQueueTicket()" class="bg-white text-brand-900 font-bold px-3 py-1 rounded text-xs hover:bg-brand-50 transition shadow">
+                                Salin Tiket
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PETA RUJUKAN FASKES INTERAKTIF -->
+    <section id="peta" class="py-12 bg-slate-100 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Koneksi Darurat</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Peta Rujukan Fasilitas Kesehatan (Tuban)</h2>
+                <p class="text-slate-600 text-sm mt-1">Titik rujukan darurat RSUD utama dan fasilitas kesehatan terdekat dari lingkungan sekolah.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <!-- Map Embed Column -->
+                <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 p-2">
+                    <div class="w-full h-[400px] rounded-xl overflow-hidden">
+                        <!-- Google Maps iframe provided by user -->
+                        <iframe id="main-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d623.80770434242!2d112.04688529975049!3d-6.898727024772395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77a2aa9786724b%3A0xcca24bd1ec218ece!2sRSUD%20Dr.%20R.%20Koesma%20Kabupaten%20Tuban!5e0!3m2!1sid!2sid!4v1795139510628!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                </div>
+
+                <!-- Faskes List Cards -->
+                <div class="space-y-4">
+                    <!-- Faskes 1 -->
+                    <div onclick="selectFaskes('rsud', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d623.80770434242!2d112.04688529975049!3d-6.898727024772395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77a2aa9786724b%3A0xcca24bd1ec218ece!2sRSUD%20Dr.%20R.%20Koesma%20Kabupaten%20Tuban!5e0!3m2!1sid!2sid!4v1795139510628!5m2!1sid!2sid')" class="bg-white border-2 border-brand-500 rounded-2xl p-5 shadow-sm cursor-pointer transition hover:shadow-md">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="bg-accent-100 text-accent-700 text-[10px] font-bold px-2 py-0.5 rounded">Rujukan Utama 1</span>
+                                <h3 class="font-bold text-slate-900 text-base mt-1">RSUD Dr. R. Koesma Tuban</h3>
+                                <p class="text-slate-600 text-xs mt-0.5">Jl. Dr. Wahidin Sudirohusodo No. 800, Tuban</p>
+                            </div>
+                            <i class="fa-solid fa-hospital text-brand-600 text-xl"></i>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="text-emerald-600 font-semibold"><i class="fa-solid fa-phone"></i> (0356) 321010</span>
+                            <span class="text-brand-600 font-bold">IGD 24 Jam</span>
+                        </div>
+                    </div>
+
+                    <!-- Faskes 2 -->
+                    <div onclick="selectFaskes('puskesmas', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.8!2d112.03!3d-6.90!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTQnMDAuMCJTIDExMsKwMDInMDAuMCJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid')" class="bg-white border border-slate-200 hover:border-brand-500 rounded-2xl p-5 shadow-sm cursor-pointer transition hover:shadow-md">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="bg-brand-50 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded">Terdekat #1</span>
+                                <h3 class="font-bold text-slate-900 text-base mt-1">Puskesmas Tuban</h3>
+                                <p class="text-slate-600 text-xs mt-0.5">Jl. Letda Sucipto, Tuban</p>
+                            </div>
+                            <i class="fa-solid fa-house-chimney-medical text-brand-600 text-xl"></i>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="text-emerald-600 font-semibold"><i class="fa-solid fa-phone"></i> (0356) 321119</span>
+                            <span class="text-slate-500 font-medium">Jarak ± 1.2 Km</span>
+                        </div>
+                    </div>
+
+                    <!-- Faskes 3 -->
+                    <div onclick="selectFaskes('klinik', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.8!2d112.05!3d-6.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTMnMDAuMCJTIDExMsKwMDMnMDAuMCJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid')" class="bg-white border border-slate-200 hover:border-brand-500 rounded-2xl p-5 shadow-sm cursor-pointer transition hover:shadow-md">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="bg-purple-50 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded">Terdekat #2</span>
+                                <h3 class="font-bold text-slate-900 text-base mt-1">Klinik Pratama Taruna Sehat</h3>
+                                <p class="text-slate-600 text-xs mt-0.5">Jl. Panglima Sudirman No. 45, Tuban</p>
+                            </div>
+                            <i class="fa-solid fa-stethoscope text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="text-emerald-600 font-semibold"><i class="fa-solid fa-phone"></i> (0356) 334455</span>
+                            <span class="text-slate-500 font-medium">Buka 08:00 - 21:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white text-xl font-bold">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-tight block leading-tight">UKS & KLINIK SANITASI</span>
+                        <span class="text-xs text-brand-200">PMR WIRA / MADYA TARUNA</span>
+                    </div>
+                </div>
+                <p class="text-brand-100 text-xs sm:text-sm max-w-md leading-relaxed">
+                    Pusat layanan kesehatan sekolah yang berkomitmen menciptakan lingkungan belajar yang bersih, sehat, tanggap darurat, dan berkarakter kepalangmerahan.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Tautan Cepat</h4>
+                <ul class="space-y-2 text-xs text-brand-100">
+                    <li><a href="#beranda" class="hover:text-white transition">Beranda Utama</a></li>
+                    <li><a href="#p3k" class="hover:text-white transition">Panduan P3K Darurat</a></li>
+                    <li><a href="#inventaris" class="hover:text-white transition">Stok Obat & Jadwal Piket</a></li>
+                    <li><a href="#survei" class="hover:text-white transition">Survei Kesehatan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Kontak & Darurat</h4>
+                <ul class="space-y-2 text-xs text-brand-100">
+                    <li><i class="fa-solid fa-phone mr-1.5 text-emerald-400"></i> IGD Sekolah: (0356) 881234</li>
+                    <li><i class="fa-solid fa-hospital mr-1.5 text-emerald-400"></i> RSUD Dr. R. Koesma: (0356) 321010</li>
+                    <li><i class="fa-solid fa-envelope mr-1.5 text-emerald-400"></i> uks.taruna@sekolah.sch.id</li>
+                    <li><i class="fa-solid fa-location-dot mr-1.5 text-emerald-400"></i> Jl. Pendidikan No. 1, Tuban</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-brand-800 text-center text-xs text-brand-300">
+            © 2026 Klinik Sanitasi & Unit Kesehatan Sekolah (PMR/UKS Taruna). Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+    <!-- MODAL P3K -->
+    <div id="p3k-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeP3kModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-kit-medical"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-brand-600 uppercase tracking-wider">Panduan Langkah P3K</span>
+                    <h3 id="modal-title" class="text-lg font-bold text-slate-900">Judul Kondisi</h3>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h4 class="text-xs font-bold text-slate-700 uppercase mb-2">Langkah Penanganan:</h4>
+                <ol id="modal-steps" class="list-decimal list-inside space-y-1.5 text-xs text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <!-- Dynamic steps -->
+                </ol>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-start gap-2 mb-6">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
+                <div>
+                    <strong class="block font-bold">Peringatan Penting:</strong>
+                    <span id="modal-warning">Jangan lakukan tindakan di luar prosedur UKS.</span>
+                </div>
+            </div>
+            <button onclick="closeP3kModal()" class="w-full bg-brand-700 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                Tutup Panduan
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL SOS DARURAT -->
+    <div id="sos-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-center">
+            <div class="w-16 h-16 rounded-full bg-red-100 text-accent-600 flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mb-1">PANGGILAN DARURAT SOS</h3>
+            <p class="text-xs text-slate-600 mb-6">Anda akan menghubungi tim medis darurat dan petugas piket UKS Taruna secara instan.</p>
+            
+            <div class="space-y-3 mb-6">
+                <a href="tel:0356881234" class="block bg-brand-700 hover:bg-brand-600 text-white font-bold py-3 rounded-xl text-sm transition shadow">
+                    <i class="fa-solid fa-phone mr-2"></i> Hubungi Piket UKS (0356) 881234
+                </a>
+                <a href="tel:0356321010" class="block bg-accent-600 hover:bg-accent-500 text-white font-bold py-3 rounded-xl text-sm transition shadow">
+                    <i class="fa-solid fa-hospital mr-2"></i> Hubungi IGD RSUD Dr. R. Koesma
+                </a>
+            </div>
+            <button onclick="closeSosModal()" class="text-slate-500 hover:text-slate-700 text-xs font-semibold">
+                Batal / Kembali
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        // Banner Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = i === index ? '1' : '0';
+            });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 6000);
+
+        // Tab Switcher (Inventaris vs Piket)
+        function switchTab(tab) {
+            const obatBtn = document.getElementById('tab-obat-btn');
+            const piketBtn = document.getElementById('tab-piket-btn');
+            const obatContent = document.getElementById('content-obat');
+            const piketContent = document.getElementById('content-piket');
+
+            if (tab === 'obat') {
+                obatBtn.className = "px-5 py-2 rounded-lg text-sm font-bold bg-brand-700 text-white transition shadow-sm";
+                piketBtn.className = "px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-brand-700 transition";
+                obatContent.classList.remove('hidden');
+                piketContent.classList.add('hidden');
+            } else {
+                piketBtn.className = "px-5 py-2 rounded-lg text-sm font-bold bg-brand-700 text-white transition shadow-sm";
+                obatBtn.className = "px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-brand-700 transition";
+                piketContent.classList.remove('hidden');
+                obatContent.classList.add('hidden');
+            }
+        }
+
+        // Filter Tabel Obat
+        function filterObat() {
+            const input = document.getElementById('search-obat').value.toLowerCase();
+            const category = document.getElementById('filter-kategori').value;
+            const rows = document.querySelectorAll('#table-obat tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                const cat = row.getAttribute('data-category');
+                const matchText = text.includes(input);
+                const matchCat = category === "" || cat === category;
+
+                if (matchText && matchCat) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        // Modal P3K Handler
+        function openP3kModal(title, steps, warning) {
+            document.getElementById('modal-title').innerText = title;
+            const stepsList = document.getElementById('modal-steps');
+            stepsList.innerHTML = '';
+            steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsList.appendChild(li);
+            });
+            document.getElementById('modal-warning').innerText = warning;
+            document.getElementById('p3k-modal').classList.remove('hidden');
+        }
+        function closeP3kModal() {
+            document.getElementById('p3k-modal').classList.add('hidden');
+        }
+
+        // Modal SOS Handler
+        function openSosModal() {
+            document.getElementById('sos-modal').classList.remove('hidden');
+        }
+        function closeSosModal() {
+            document.getElementById('sos-modal').classList.add('hidden');
+        }
+
+        // Video PHBS Controls
+        const videoElement = document.getElementById('phbs-video');
+        function playLocalVideo() {
+            if (videoElement.paused) {
+                videoElement.play();
+            } else {
+                videoElement.pause();
+            }
+        }
+        function seekVideo(seconds) {
+            videoElement.currentTime = seconds;
+            videoElement.play();
+        }
+        function onVideoEnded() {
+            document.getElementById('video-status-text').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Status: Selesai ditonton!';
+            document.getElementById('btn-selesai-video').className = "bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow";
+        }
+        function markVideoCompleted() {
+            document.getElementById('video-status-text').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Status: Ditandai selesai oleh Anda!';
+            alert('Modul video edukasi PHBS telah ditandai selesai.');
+        }
+
+        // Form Periksa Antrean Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const nama = document.getElementById('form-nama').value;
+            const kelas = document.getElementById('form-kelas').value;
+            const keluhan = document.getElementById('form-keluhan').value;
+
+            document.getElementById('queue-number').innerText = 'UKS-09';
+            document.getElementById('queue-name').innerText = nama + ' (' + kelas + ') - ' + keluhan;
+            document.getElementById('queue-status').innerText = 'Menunggu Panggilan';
+
+            alert('Pendaftaran berhasil! Nomor antrean Anda adalah UKS-09.');
+            document.getElementById('uk-form').reset();
+        }
+
+        function copyQueueTicket() {
+            const num = document.getElementById('queue-number').innerText;
+            const name = document.getElementById('queue-name').innerText;
+            navigator.clipboard.writeText(`Nomor Antrean UKS: ${num} - ${name}`);
+            alert('Nomor tiket berhasil disalin ke clipboard!');
+        }
+
+        // Survey Alert Handler
+        function submitSurvey(type) {
+            alert(`Terima kasih! Umpan balik untuk "${type}" telah berhasil dikirim.`);
+        }
+
+        // Map Faskes Selector
+        function selectFaskes(type, embedUrl) {
+            document.getElementById('main-map-iframe').src = embedUrl;
+        }
+
+        // Set current day label
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const todayName = days[new Date().getDay()];
+        const dayLabel = document.getElementById('current-day-label');
+        if(dayLabel) dayLabel.innerText = todayName;
